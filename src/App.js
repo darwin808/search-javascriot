@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import jsondata from "./MOCK_DATA.json";
 
 function App() {
+  const [name, setname] = useState("");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => {
+          setname(e.target.value);
+        }}
+      />
+
+      {jsondata
+        .filter((e) => e.first_name.toLowerCase().includes(name.toLowerCase()))
+        .map((e) => (
+          <div key={e.id}>{e.first_name}</div>
+        ))}
     </div>
   );
 }
